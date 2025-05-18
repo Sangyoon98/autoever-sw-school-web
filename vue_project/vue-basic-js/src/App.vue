@@ -30,9 +30,9 @@ import UserList from "./pages/UserList.vue";
 </script>
 
 <template>
+  <!-- <h3>App.vue 영역 입니다.</h3> -->
   <!-- <h1>{{ name }}</h1>
   <input v-model="name" placeholder="이름 입력" /> -->
-  <!-- <h3>App.vue 영역 입니다.</h3> -->
   <!-- <DataBinding /> -->
   <!-- <ConditionRender /> -->
   <!-- <IterableArray /> -->
