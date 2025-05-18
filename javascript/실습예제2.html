@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        align-items: center;
+      }
+
+      .group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      div {
+        padding: 10px 40px;
+        color: white;
+      }
+
+      #green {
+        background-color: green;
+      }
+
+      #orange {
+        background-color: orange;
+      }
+
+      #purple {
+        background-color: purple;
+      }
+
+      #background {
+        width: 300px;
+        height: 200px;
+        background-color: orange;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="group">
+      <div id="green" onclick="clickEvent('green')">Green</div>
+      <div id="orange" onclick="clickEvent('orange')">Orange</div>
+      <div id="purple" onclick="clickEvent('purple')">Purple</div>
+    </div>
+    <div id="background"></div>
+
+    <script>
+      function clickEvent(color) {
+        const back = document.querySelector("#background");
+        back.style.background = color;
+      }
+    </script>
+  </body>
+</html>

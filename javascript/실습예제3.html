@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: all 1s ease;
+      }
+
+      .img_container {
+        display: flex;
+        position: relative;
+      }
+
+      img {
+        width: 400px;
+        height: auto;
+      }
+
+      .title {
+        font-weight: bold;
+      }
+
+      .detail_container {
+        width: 400px;
+        display: none;
+        flex-direction: column;
+      }
+
+      .showBtn,
+      .closeBtn {
+        padding: 5px;
+        border: 1px solid gray;
+        font-size: 12px;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      }
+
+      .showBtn {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <div class="img_container">
+          <img src="./img/잇지.jpeg" alt="" />
+          <span class="showBtn" onclick="showDetail(false)"
+            >상세 설명 보기</span
+          >
+        </div>
+        <div class="detail_container">
+          <p class="title">그룹 잇지</p>
+          <p>
+            팀명 'ITZY'는 '너희가 원하는 거 전부 있지? 있지!'라는 뜻을 가지고
+            있으며, 정식 한글 표기법은 있지이다. 혹 영어명인 'ITZY'로만 들어본
+            사람들이 한글로는 어떻게 적는지 몰라 '잇지'라고 부르는 경우고 꽤
+            많이 있는데, '있지'라고 불러야 한다며 정정해주는 것이 팬덤
+            잇지에게는 일상이 되었다.
+          </p>
+          <span class="closeBtn" onclick="closeDetail(true)"
+            >상세 설명 닫기</span
+          >
+        </div>
+      </div>
+    </div>
+    <script>
+      function showDetail(isDetail) {
+        const container = document.querySelector(".detail_container");
+        const showBtn = document.querySelector(".showBtn");
+        if (isDetail) {
+          container.style.display = "inline-block";
+          showBtn.style.display = "none";
+        } else {
+          container.style.display = "none";
+          showBtn.style.display = "inline";
+        }
+      }
+    </script>
+  </body>
+</html>

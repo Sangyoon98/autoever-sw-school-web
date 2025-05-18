@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        width: 1000px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      img {
+        width: 300px;
+        height: 200px;
+      }
+
+      .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .image {
+        padding: 0;
+        position: relative;
+        color: white;
+        overflow: hidden;
+      }
+
+      .overlay {
+        width: 300px;
+        height: 200px;
+        position: absolute;
+        top: -200px;
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transition: all 0.5s ease;
+        box-sizing: border-bx;
+        text-align: center;
+      }
+
+      .image:hover .overlay {
+        opacity: 1;
+        transform: translateY(200px);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>신상품 목록</h1>
+      <div class="image-container">
+        <div class="image">
+          <img src="./images/prod1.jpg" alt="image1" />
+          <div class="overlay">
+            <h2>상품 1</h2>
+            <p>상품 1 설명 텍스트</p>
+            <p>가격 : 12,345원</p>
+          </div>
+        </div>
+        <div class="image">
+          <img src="./images/prod2.jpg" alt="image2" />
+          <div class="overlay">
+            <h2>상품 2</h2>
+            <p>상품 2 설명 텍스트</p>
+            <p>가격 : 12,345원</p>
+          </div>
+        </div>
+        <div class="image">
+          <img src="./images/prod3.jpg" alt="image3" />
+          <div class="overlay">
+            <h2>상품 3</h2>
+            <p>상품 3 설명 텍스트</p>
+            <p>가격 : 12,345원</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

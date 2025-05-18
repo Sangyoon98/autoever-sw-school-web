@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        max-width: 1280px;
+        min-width: 768px;
+        min-height: 100vh;
+        margin: 0 auto;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        height: 60px;
+        padding: 0 16px;
+        background-color: white;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .header-left {
+        width: 50px;
+        height: 50px;
+        background-color: #d5a273;
+        border-radius: 6px;
+      }
+
+      nav {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        gap: 30px;
+      }
+
+      nav a {
+        padding: 20px 40px;
+        font-size: 18px;
+        font-weight: 500;
+        color: #006241;
+        padding: 6px 12px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      nav a:hover {
+        background-color: #d5a273;
+        border-radius: 6px;
+        color: white;
+      }
+
+      .header-right {
+        width: 50px;
+        height: 50px;
+        background-color: #d5a273;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+
+      .header-right i {
+        font-size: 20px;
+        color: white;
+      }
+
+      main {
+        padding: 40px;
+        background-color: #fdfaf6;
+        flex-grow: 1;
+      }
+
+      footer {
+        height: 60px;
+        text-align: center;
+        color: white;
+        background-color: #006241;
+        line-height: 60px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left"></div>
+      <nav>
+        <a href="#">정치</a>
+        <a href="#">경제</a>
+        <a href="#">사회</a>
+        <a href="#">문화</a>
+      </nav>
+      <div class="header-right" role="button" aria-label="메뉴 열기">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </header>
+    <main>
+      <!--  -->
+    </main>
+    <footer>
+      <p>2025 My News Site</p>
+    </footer>
+  </body>
+</html>

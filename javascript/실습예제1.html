@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>DOM 추가/삭제</h1>
+    <p>공부할 과목을 기록해 보세요.</p>
+    <p>공부가 끝난 과목은 클릭해서 삭제할 수 있습니다.</p>
+    <input type="text" name="input" id="input" />
+    <button id="addBtn">추가</button>
+    <ul id="list"></ul>
+    <script>
+      const inputEl = document.querySelector("#input");
+      const addBtnEl = document.querySelector("#addBtn");
+      const listEl = document.querySelector("#list");
+
+      addBtnEl.addEventListener("click", () => {
+        const liEl = document.createElement("li");
+        liEl.innerText = inputEl.value;
+        listEl.appendChild(liEl);
+        inputEl.value = "";
+      });
+
+      listEl.addEventListener("dblclick", (e) => {
+        if (e.target.tagName === "LI") {
+          e.target.remove();
+        }
+      });
+    </script>
+  </body>
+</html>
