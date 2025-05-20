@@ -47,7 +47,10 @@ import BaseInput from "../components/base/BaseInput.vue";
 import BaseButton from "../components/base/BaseButton.vue";
 import BaseError from "../components/base/BaseError.vue";
 import { useRouter } from "vue-router";
+import { useModalStore } from "../stores/modal";
 const router = useRouter();
+
+const modalStore = useModalStore();
 
 const form = reactive({
   email: "",
@@ -65,20 +68,29 @@ const handleSubmit = async () => {
       form.password_check === "" ||
       form.name === ""
     ) {
-      alert("모든 값을 입력해주세요.");
+      modalStore.openModal({
+        title: "회원가입 실패",
+        message: "모든 값을 입력해주세요.",
+      });
       return;
     }
 
     // 이메일 형식 검사
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(form.email)) {
-      alert("올바른 이메일 형식을 입력해주세요.");
+      modalStore.openModal({
+        title: "회원가입 실패",
+        message: "올바른 이메일 형식을 입력해주세요.",
+      });
       return;
     }
 
     // 비밀번호 확인 검사
     if (form.password !== form.password_check) {
-      alert("비밀번호가 일치하지 않습니다.");
+      modalStore.openModal({
+        title: "회원가입 실패",
+        message: "비밀번호가 일치하지 않습니다.",
+      });
       return;
     }
 
@@ -91,22 +103,35 @@ const handleSubmit = async () => {
     const exist = await axios.get(
       `http://222.117.237.119:8111/auth/exists/${form.email}`
     );
-    if (exist.data === false) alert("이미 가입된 이메일입니다.");
-    else {
+    if (exist.data === false) {
+      modalStore.openModal({
+        title: "회원가입 실패",
+        message: "이미 가입된 이메일입니다.",
+      });
+    } else {
       const res = await axios.post(
         "http://222.117.237.119:8111/auth/signup",
         payload
       );
       if (res.data) {
-        alert("회원 가입 성공");
+        modalStore.openModal({
+          title: "회원가입 성공",
+          message: "회원가입이 완료되었습니다.",
+        });
         router.push("/");
       } else {
-        alert("회원 가입 실패");
+        modalStore.openModal({
+          title: "회원가입 실패",
+          message: "다시 시도해주세요.",
+        });
       }
     }
   } catch (err) {
     console.error(err);
-    alert("가입 실패! 서버 오류 발생");
+    modalStore.openModal({
+      title: "회원가입 실패",
+      message: "서버 오류 발생",
+    });
   }
 };
 </script>
