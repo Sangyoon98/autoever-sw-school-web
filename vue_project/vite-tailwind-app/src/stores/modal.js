@@ -15,7 +15,7 @@ export const useModalStore = defineStore("modal", () => {
 
   // 모달을 닫는 함수
   function closeModal() {
-    show.value = false;
+    show.value = false; 
     title.value = "";
     message.value = "";
   }
