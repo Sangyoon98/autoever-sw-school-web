@@ -20,5 +20,5 @@ import { useThemeStore } from "../stores/theme";
 
 const themeStore = useThemeStore();
 const setColor = themeStore.setColor;
-const colors = ["orange", "green", "lightgrey", "grey", "royalblue"];
+const colors = ["orange", "green", "lightgrey", "grey", "royalblue", "red"];
 </script>

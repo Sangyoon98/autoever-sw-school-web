@@ -29,7 +29,6 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import axios from "axios";
 import BaseInput from "../components/base/BaseInput.vue";
 import BaseButton from "../components/base/BaseButton.vue";
 import BaseError from "../components/base/BaseError.vue";
@@ -49,54 +48,48 @@ const form = reactive({
   password: "",
 });
 
+const ERROR_MSG = {
+  EMPTY: "모든 값을 입력해주세요.",
+  INVALID_EMAIL: "올바른 이메일 형식을 입력해주세요.",
+  SERVER: "서버 오류 발생",
+  LOGIN_FAIL: "이메일 또는 비밀번호를 확인해주세요.",
+};
+
+function isEmptyForm(form) {
+  return !form.email || !form.password;
+}
+
+function isValidEmail(email) {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+}
+
+function openErrorModal(type) {
+  modalStore.openModal({
+    title: "로그인 실패",
+    message: ERROR_MSG[type],
+  });
+}
+
 const handleSubmit = async () => {
   try {
-    // 빈 값 확인 검사
-    if (form.password === "" || form.email === "") {
-      modalStore.openModal({
-        title: "로그인 실패",
-        message: "모든 값을 입력해주세요.",
-      });
-      return;
+    if (isEmptyForm(form)) {
+      return openErrorModal("EMPTY");
     }
-
-    // 이메일 형식 검사
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(form.email)) {
-      modalStore.openModal({
-        title: "로그인 실패",
-        message: "올바른 이메일 형식을 입력해주세요.",
-      });
-      return;
+    if (!isValidEmail(form.email)) {
+      return openErrorModal("INVALID_EMAIL");
     }
-
-    // 로그인 API 호출
-    const payload = {
-      email: form.email,
-      pwd: form.password,
-    };
 
     const res = await login(form.email, form.password);
-    // const res = await axios.post(
-    //   "http://222.117.237.119:8111/auth/login",
-    //   payload
-    // );
     if (res.data) {
       localStorage.setItem("isLogin", "TRUE");
       userStore.setEmail(form.email);
       router.push("/home");
     } else {
-      modalStore.openModal({
-        title: "로그인 실패",
-        message: "이메일 또는 비밀번호를 확인해주세요.",
-      });
+      openErrorModal("LOGIN_FAIL");
     }
   } catch (err) {
     console.error(err);
-    modalStore.openModal({
-      title: "로그인 실패",
-      message: "서버 오류 발생",
-    });
+    openErrorModal("SERVER");
   }
 };
 </script>

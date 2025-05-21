@@ -42,7 +42,6 @@
 
 <script setup>
 import { reactive } from "vue";
-import axios from "axios";
 import BaseInput from "../components/base/BaseInput.vue";
 import BaseButton from "../components/base/BaseButton.vue";
 import BaseError from "../components/base/BaseError.vue";
@@ -62,82 +61,66 @@ const form = reactive({
   name: "",
 });
 
+const ERROR_MSG = {
+  EMPTY: "모든 값을 입력해주세요.",
+  INVALID_EMAIL: "올바른 이메일 형식을 입력해주세요.",
+  PASSWORD_MISMATCH: "비밀번호가 일치하지 않습니다.",
+  EMAIL_EXISTS: "이미 가입된 이메일입니다.",
+  SERVER: "서버 오류 발생",
+  TRY_AGAIN: "다시 시도해주세요.",
+  SUCCESS: "회원가입이 완료되었습니다.",
+};
+
+function isEmptyForm(form) {
+  return !form.email || !form.password || !form.password_check || !form.name;
+}
+
+function isValidEmail(email) {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+}
+
+function isPasswordMatch(password, passwordCheck) {
+  return password === passwordCheck;
+}
+
+function openErrorModal(type) {
+  modalStore.openModal({
+    title: "회원가입 실패",
+    message: ERROR_MSG[type],
+  });
+}
+
 const handleSubmit = async () => {
   try {
-    // 빈 값 확인 검사
-    if (
-      form.password === "" ||
-      form.email === "" ||
-      form.password_check === "" ||
-      form.name === ""
-    ) {
-      modalStore.openModal({
-        title: "회원가입 실패",
-        message: "모든 값을 입력해주세요.",
-      });
-      return;
+    if (isEmptyForm(form)) {
+      return openErrorModal("EMPTY");
     }
-
-    // 이메일 형식 검사
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailPattern.test(form.email)) {
-      modalStore.openModal({
-        title: "회원가입 실패",
-        message: "올바른 이메일 형식을 입력해주세요.",
-      });
-      return;
+    if (!isValidEmail(form.email)) {
+      return openErrorModal("INVALID_EMAIL");
     }
-
-    // 비밀번호 확인 검사
-    if (form.password !== form.password_check) {
-      modalStore.openModal({
-        title: "회원가입 실패",
-        message: "비밀번호가 일치하지 않습니다.",
-      });
-      return;
+    if (!isPasswordMatch(form.password, form.password_check)) {
+      return openErrorModal("PASSWORD_MISMATCH");
     }
-
-    const payload = {
-      email: form.email,
-      pwd: form.password,
-      name: form.name,
-    };
 
     const exist = await exists(form.email);
 
-    // const exist = await axios.get(
-    //   `http://222.117.237.119:8111/auth/exists/${form.email}`
-    // );
     if (exist.data === false) {
+      return openErrorModal("EMAIL_EXISTS");
+    }
+
+    const res = await signup(form.email, form.password, form.name);
+    if (res.data) {
       modalStore.openModal({
-        title: "회원가입 실패",
-        message: "이미 가입된 이메일입니다.",
+        title: "회원가입 성공",
+        message: ERROR_MSG.SUCCESS,
       });
+      router.push("/");
     } else {
-      const res = await signup(form.email, form.password, form.name);
-      // const res = await axios.post(
-      //   "http://222.117.237.119:8111/auth/signup",
-      //   payload
-      // );
-      if (res.data) {
-        modalStore.openModal({
-          title: "회원가입 성공",
-          message: "회원가입이 완료되었습니다.",
-        });
-        router.push("/");
-      } else {
-        modalStore.openModal({
-          title: "회원가입 실패",
-          message: "다시 시도해주세요.",
-        });
-      }
+      openErrorModal("TRY_AGAIN");
     }
   } catch (err) {
     console.error(err);
-    modalStore.openModal({
-      title: "회원가입 실패",
-      message: "서버 오류 발생",
-    });
+    openErrorModal("SERVER");
   }
 };
 </script>
