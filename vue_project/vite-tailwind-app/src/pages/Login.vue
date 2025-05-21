@@ -36,7 +36,9 @@ import BaseError from "../components/base/BaseError.vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { useModalStore } from "../stores/modal";
+import { useAuthApi } from "../api/auth";
 
+const { login } = useAuthApi();
 const router = useRouter();
 
 const userStore = useUserStore();
@@ -74,10 +76,11 @@ const handleSubmit = async () => {
       pwd: form.password,
     };
 
-    const res = await axios.post(
-      "http://222.117.237.119:8111/auth/login",
-      payload
-    );
+    const res = await login(form.email, form.password);
+    // const res = await axios.post(
+    //   "http://222.117.237.119:8111/auth/login",
+    //   payload
+    // );
     if (res.data) {
       localStorage.setItem("isLogin", "TRUE");
       userStore.setEmail(form.email);
