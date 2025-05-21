@@ -37,6 +37,13 @@
       >
         채팅
       </button>
+
+      <button
+        class="bg-transparent border border-white text-white font-semibold py-6 rounded-lg"
+        @click="navigateTo('/Upload')"
+      >
+        업로드
+      </button>
     </div>
   </div>
 </template>

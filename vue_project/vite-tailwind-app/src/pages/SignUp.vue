@@ -48,6 +48,9 @@ import BaseButton from "../components/base/BaseButton.vue";
 import BaseError from "../components/base/BaseError.vue";
 import { useRouter } from "vue-router";
 import { useModalStore } from "../stores/modal";
+import { useAuthApi } from "../api/auth";
+
+const { signup, exists } = useAuthApi();
 const router = useRouter();
 
 const modalStore = useModalStore();
@@ -100,19 +103,22 @@ const handleSubmit = async () => {
       name: form.name,
     };
 
-    const exist = await axios.get(
-      `http://222.117.237.119:8111/auth/exists/${form.email}`
-    );
+    const exist = await exists(form.email);
+
+    // const exist = await axios.get(
+    //   `http://222.117.237.119:8111/auth/exists/${form.email}`
+    // );
     if (exist.data === false) {
       modalStore.openModal({
         title: "회원가입 실패",
         message: "이미 가입된 이메일입니다.",
       });
     } else {
-      const res = await axios.post(
-        "http://222.117.237.119:8111/auth/signup",
-        payload
-      );
+      const res = await signup(form.email, form.password, form.name);
+      // const res = await axios.post(
+      //   "http://222.117.237.119:8111/auth/signup",
+      //   payload
+      // );
       if (res.data) {
         modalStore.openModal({
           title: "회원가입 성공",

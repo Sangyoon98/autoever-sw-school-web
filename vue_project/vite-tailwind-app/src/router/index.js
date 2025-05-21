@@ -5,6 +5,7 @@ import Layout from "../HomeLayout.vue";
 import UserList from "../pages/UserList.vue";
 import ThemeSetting from "../pages/ThemeSetting.vue";
 import Home from "../pages/Home.vue";
+import ImageUploader from "../pages/ImageUploader.vue";
 
 const routes = [
   { path: "/", name: "Login", component: Login },
@@ -19,6 +20,7 @@ const routes = [
       { path: "", name: "Home", component: Home },
       { path: "/members", name: "User", component: UserList },
       { path: "/theme", name: "Theme", component: ThemeSetting },
+      { path: "/upload", name: "Upload", component: ImageUploader },
     ],
   },
 ];
