@@ -70,24 +70,24 @@ const ERROR_MSG = {
   SUCCESS: "회원가입이 완료되었습니다.",
 };
 
-function isEmptyForm(form) {
+const isEmptyForm = (form) => {
   return !form.email || !form.password || !form.password_check || !form.name;
-}
+};
 
-function isValidEmail(email) {
+const isValidEmail = (email) => {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-}
+};
 
-function isPasswordMatch(password, passwordCheck) {
+const isPasswordMatch = (password, passwordCheck) => {
   return password === passwordCheck;
-}
+};
 
-function openErrorModal(type) {
+const openErrorModal = (type) => {
   modalStore.openModal({
     title: "회원가입 실패",
     message: ERROR_MSG[type],
   });
-}
+};
 
 const handleSubmit = async () => {
   try {

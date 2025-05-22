@@ -55,20 +55,20 @@ const ERROR_MSG = {
   LOGIN_FAIL: "이메일 또는 비밀번호를 확인해주세요.",
 };
 
-function isEmptyForm(form) {
+const isEmptyForm = (form) => {
   return !form.email || !form.password;
-}
+};
 
-function isValidEmail(email) {
+const isValidEmail = (email) => {
   return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
-}
+};
 
-function openErrorModal(type) {
+const openErrorModal = (type) => {
   modalStore.openModal({
     title: "로그인 실패",
     message: ERROR_MSG[type],
   });
-}
+};
 
 const handleSubmit = async () => {
   try {
