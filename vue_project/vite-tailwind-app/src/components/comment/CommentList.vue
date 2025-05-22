@@ -33,12 +33,12 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { useBoardApi } from "../../api/board";
+import { useCommentApi } from "../../api/comment";
 import { useUserStore } from "../../stores/user";
 
 const userStore = useUserStore();
 
-const { commentList, commentWrite } = useBoardApi();
+const { commentList, commentRegister } = useCommentApi();
 const route = useRoute();
 const comments = ref([]);
 const content = ref("");
@@ -50,7 +50,7 @@ const loadComments = async () => {
 
 const submitComment = async () => {
   if (!content.value.trim()) return;
-  await commentWrite(userStore.email, route.params.id, content.value);
+  await commentRegister(userStore.email, route.params.id, content.value);
   content.value = "";
   await loadComments();
 };

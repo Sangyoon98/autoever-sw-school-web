@@ -1,26 +1,27 @@
 <template>
-  <CateTemplate>
-    <CateInsert @insert="onInsert" />
-    <CateList :cates="categories" @remove="onRemove" />
-  </CateTemplate>
+  <CategoryTemplate>
+    <CategoryInsert @insert="onInsert" />
+    <CategoryList :cates="categories" @remove="onRemove" />
+  </CategoryTemplate>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import CateInsert from "../components/category/CateInsert.vue";
-import CateList from "../components/category/CateList.vue";
-import CateTemplate from "../components/category/CateTemplate.vue";
-import { useBoardApi } from "../api/board";
-const { cateList, cateInsert, cateDelete } = useBoardApi();
+import CategoryTemplate from "../components/category/CategoryTemplate.vue";
+import { useCategoryApi } from "../api/category";
 import { useUserStore } from "../stores/user";
 import { useModalStore } from "../stores/modal"; // ✅ 모달 store import
+import CategoryInsert from "../components/category/CategoryInsert.vue";
+import CategoryList from "../components/category/CategoryList.vue";
+
+const { categoryList, categoryRegister, categoryDelete } = useCategoryApi();
 const userStore = useUserStore();
 const categories = ref([]);
 const selectedCategoryId = ref(null);
 const modal = useModalStore();
 
 const loadCategory = async () => {
-  const res = await cateList();
+  const res = await categoryList();
   categories.value = res.data;
 };
 
@@ -28,7 +29,7 @@ onMounted(loadCategory);
 
 const onInsert = async (text) => {
   try {
-    const res = await cateInsert(userStore.email, text);
+    const res = await categoryRegister(userStore.email, text);
     if (res.data) await loadCategory();
     console.log("카테고리 리스트:", res.data);
   } catch (error) {
@@ -51,7 +52,7 @@ const onRemove = (id) => {
 
 const confirmModal = async () => {
   try {
-    const res = await cateDelete(selectedCategoryId.value);
+    const res = await categoryDelete(selectedCategoryId.value);
     if (res.data) await loadCategory();
   } catch (error) {
     modal.open({

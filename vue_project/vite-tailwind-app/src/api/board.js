@@ -1,18 +1,38 @@
 import axios from "./axiosInstance";
 
 export const useBoardApi = () => {
-  const cateList = async () => {
-    return await axios.get("/api/category/list");
+  // Board Delete
+  const boardDelete = async (id) => {
+    return await axios.delete(`/api/board/delete/${id}`);
   };
-  const cateInsert = async (email, categoryName) => {
-    return await axios.post("/api/category/new", { email, categoryName });
+
+  // Board Detail
+  const boardDetail = async (id) => {
+    return await axios.get(`/api/board/detail/${id}`);
   };
-  const cateDelete = async (categoryId) => {
-    return await axios.delete(`/api/category/delete/${categoryId}`);
-  };
+
+  // Board List
   const boardList = async () => {
     return await axios.get("/api/board/list");
   };
+
+  // Board List (Page)
+  const boardListPage = async (page) => {
+    return await axios.get("/api/board/list/page");
+  };
+
+  // Board Modify
+  const boardModify = async (id, title, content, categoryId, img) => {
+    return await axios.put("/api/board/modify", {
+      id,
+      title,
+      content,
+      categoryId,
+      img,
+    });
+  };
+
+  // Board Register
   const boardWrite = async (email, title, categoryId, content, img) => {
     return await axios.post("/api/board/new", {
       title,
@@ -22,27 +42,19 @@ export const useBoardApi = () => {
       img,
     });
   };
-  const boardDetail = async (id) => {
-    return await axios.get(`/api/board/detail/${id}`);
+
+  // Board Search
+  const boardSearch = async (keyword) => {
+    return await axios.get("/api/board/search"), { keyword };
   };
-  const boardDelete = async (id) => {
-    return await axios.delete(`/api/board/delete/${id}`);
-  };
-  const commentList = async (id) => {
-    return await axios.get(`/api/comment/list/${id}`);
-  };
-  const commentWrite = async (email, boardId, content) => {
-    return await axios.post("/api/comment/new", { email, boardId, content });
-  };
+
   return {
-    cateList,
-    cateInsert,
-    cateDelete,
-    boardList,
-    boardWrite,
-    boardDetail,
     boardDelete,
-    commentList,
-    commentWrite,
+    boardDetail,
+    boardList,
+    boardListPage,
+    boardModify,
+    boardWrite,
+    boardSearch,
   };
 };

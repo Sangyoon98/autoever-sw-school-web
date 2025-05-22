@@ -27,19 +27,6 @@
       </button>
       <button
         class="bg-transparent border border-white text-white font-semibold py-6 rounded-lg"
-        @click="navigateTo('/category')"
-      >
-        카테고리 설정
-      </button>
-      <button
-        class="bg-transparent border border-white text-white font-semibold py-6 rounded-lg"
-        @click="navigateTo('/Chat')"
-      >
-        채팅
-      </button>
-
-      <button
-        class="bg-transparent border border-white text-white font-semibold py-6 rounded-lg"
         @click="navigateTo('/Upload')"
       >
         업로드

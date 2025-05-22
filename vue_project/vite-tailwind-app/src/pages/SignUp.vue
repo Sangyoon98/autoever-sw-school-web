@@ -51,7 +51,6 @@ import { useAuthApi } from "../api/auth";
 
 const { signup, exists } = useAuthApi();
 const router = useRouter();
-
 const modalStore = useModalStore();
 
 const form = reactive({

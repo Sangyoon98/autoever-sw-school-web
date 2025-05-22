@@ -17,9 +17,9 @@
 
 <script setup>
 import { ref } from "vue";
+
 const emit = defineEmits(["insert"]);
 const value = ref("");
-
 const onSubmit = () => {
   emit("insert", value.value);
   value.value = "";

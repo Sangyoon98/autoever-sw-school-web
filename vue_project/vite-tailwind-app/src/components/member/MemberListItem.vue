@@ -51,12 +51,12 @@ const props = defineProps({
 
 const router = useRouter();
 
-function memberDetail() {
+const memberDetail = () => {
   router.push({
     name: "MemberDetail",
     params: {
       email: props.item.email,
     },
   });
-}
+};
 </script>

@@ -7,7 +7,7 @@ import Home from "../pages/Home.vue";
 import ImageUploader from "../pages/ImageUploader.vue";
 import Category from "../pages/Category.vue";
 import Board from "../pages/Board.vue";
-import BoardDetailPage from "../pages/BoardDetailPage.vue";
+import BoardDetail from "../pages/BoardDetail.vue";
 import BoardWrite from "../pages/BoardWrite.vue";
 import MemberList from "../pages/MemberList.vue";
 import MemberDetail from "../pages/MemberDetail.vue";
@@ -33,7 +33,7 @@ const routes = [
       {
         path: "/boardDetail/:id",
         name: "BoardDetail",
-        component: BoardDetailPage,
+        component: BoardDetail,
       },
       {
         path: "/boardWrite",

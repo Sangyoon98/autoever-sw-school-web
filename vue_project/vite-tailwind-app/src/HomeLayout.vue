@@ -32,6 +32,7 @@ import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./stores/user";
 import { useModalStore } from "./stores/modal"; // ✅ 모달 store import
+
 const router = useRouter();
 const isLogin = localStorage.getItem("isLogin");
 const userStore = useUserStore();

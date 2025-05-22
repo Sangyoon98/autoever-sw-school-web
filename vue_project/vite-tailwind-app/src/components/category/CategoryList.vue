@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-y-auto max-h-96">
-    <CateItem
+    <CategoryItem
       v-for="cate in cates"
       :key="cate.categoryId"
       :cate="cate"
@@ -10,7 +10,8 @@
 </template>
 
 <script setup>
-import CateItem from "./CateItem.vue";
+import CategoryItem from "./CategoryItem.vue";
+
 defineProps({ cates: Array });
 const emit = defineEmits(["remove"]);
 const onRemove = (id) => emit("remove", id);

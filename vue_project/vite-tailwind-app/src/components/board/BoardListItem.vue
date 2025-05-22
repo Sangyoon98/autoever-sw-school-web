@@ -4,7 +4,7 @@
   >
     <img
       v-if="board.img"
-      :src="board.img || 'null'"
+      :src="board.img"
       alt="board image"
       class="w-28 h-28 rounded mr-4"
     />

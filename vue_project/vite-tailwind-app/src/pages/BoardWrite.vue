@@ -70,10 +70,12 @@
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useBoardApi } from "../api/board";
+import { useCategoryApi } from "../api/category";
 import { storage } from "../api/firebase";
 import { useUserStore } from "../stores/user";
 
-const { cateList, boardWrite } = useBoardApi();
+const { boardWrite } = useBoardApi();
+const { categoryList } = useCategoryApi();
 const title = ref("");
 const content = ref("");
 const file = ref(null);
@@ -84,7 +86,7 @@ const userStore = useUserStore();
 const router = useRouter();
 
 onMounted(async () => {
-  const res = await cateList();
+  const res = await categoryList();
   categories.value = res.data;
 });
 

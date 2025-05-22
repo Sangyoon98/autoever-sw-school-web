@@ -30,16 +30,18 @@
 import { ref, onMounted, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useBoardApi } from "../api/board";
+import { useCategoryApi } from "../api/category";
 import BoardList from "../components/board/BoardList.vue";
 
-const { cateList, boardList: fetchBoardList } = useBoardApi();
+const { boardList: fetchBoardList } = useBoardApi();
+const { categoryList } = useCategoryApi();
 const categories = ref([]);
 const boardList = ref([]);
 const selectedCategory = ref("all");
 const router = useRouter();
 
 onMounted(async () => {
-  const res = await cateList();
+  const res = await categoryList();
   categories.value = res.data;
   await loadBoardList();
 });
