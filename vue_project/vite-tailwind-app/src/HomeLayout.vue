@@ -31,16 +31,17 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./stores/user";
-import { useModalConfirmStore } from "./stores/modalConfirm";
+import { useModalStore } from "./stores/modal"; // ✅ 모달 store import
 const router = useRouter();
 const isLogin = localStorage.getItem("isLogin");
 const userStore = useUserStore();
-const modalConfirmStore = useModalConfirmStore();
+const modal = useModalStore();
 
 const logout = () => {
-  modalConfirmStore.openModal({
+  modal.open({
     title: "로그아웃",
     message: "로그아웃 하시겠습니까?",
+    hasCancel: true,
     onConfirm: () => {
       localStorage.setItem("isLogin", "FALSE");
       router.push("/");
