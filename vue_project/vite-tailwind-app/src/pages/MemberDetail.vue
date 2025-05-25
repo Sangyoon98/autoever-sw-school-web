@@ -100,12 +100,12 @@ onMounted(async () => {
   editItem.value = { ...res.data };
 });
 
-function startEdit() {
+const startEdit = () => {
   editItem.value = { ...item.value };
   isEditing.value = true;
 }
 
-function cancelEdit() {
+const cancelEdit = () => {
   isEditing.value = false;
   editItem.value = { ...item.value };
 }

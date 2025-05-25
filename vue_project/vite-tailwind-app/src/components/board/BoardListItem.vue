@@ -30,5 +30,5 @@ dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
 const timeFromNow = (dateStr) => dayjs(dateStr).fromNow();
-const props = defineProps({ board: Object });
+defineProps({ board: Object });
 </script>

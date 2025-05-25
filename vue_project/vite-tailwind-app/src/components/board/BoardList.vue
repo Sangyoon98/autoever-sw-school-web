@@ -12,7 +12,7 @@
 <script setup>
 import BoardListItem from "./BoardListItem.vue";
 
-const props = defineProps({ boardList: Array });
+defineProps({ boardList: Array });
 const emit = defineEmits(["detail"]);
 const onClick = (id) => {
   emit("detail", id);

@@ -12,10 +12,8 @@
 <script setup>
 import { onMounted, reactive } from "vue";
 import MemberListItem from "../components/member/MemberListItem.vue";
-import { useRouter } from "vue-router";
 import { useMemberApi } from "../api/member";
 
-const router = useRouter();
 const items = reactive([]);
 const { memberList } = useMemberApi();
 
