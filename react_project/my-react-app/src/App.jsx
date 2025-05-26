@@ -8,6 +8,9 @@ import Info from "./info";
 import Clock from "./Clock";
 import Counter from "./Counter";
 import Average from "./Average";
+import RefCnt from "./RefCnt.jsx";
+import CreateRef from "./CreateRef.jsx";
+import StyledComp from "./StyledComp.jsx";
 
 function App() {
   return (
@@ -24,7 +27,10 @@ function App() {
       {/* <Info /> */}
       {/* <Clock /> */}
       {/* <Counter /> */}
-      <Average />
+      {/*<Average />*/}
+      {/*<RefCnt/>*/}
+      {/*<CreateRef />*/}
+      <StyledComp />
     </>
   );
 }
