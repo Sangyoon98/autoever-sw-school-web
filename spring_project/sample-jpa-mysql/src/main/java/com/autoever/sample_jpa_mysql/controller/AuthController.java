@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j  // Log 메시지 출력을 위한 어노테이션
-@RestController
+@RestController // REST API (GET, POST, PUT, DELETE)
 @RequestMapping("/auth")
 public class AuthController {
     // 1.1 회원 가입

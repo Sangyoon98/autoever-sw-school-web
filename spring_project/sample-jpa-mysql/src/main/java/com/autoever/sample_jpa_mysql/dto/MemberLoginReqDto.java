@@ -7,6 +7,7 @@ import lombok.*;
 @NoArgsConstructor  // 기본 생성자
 @AllArgsConstructor // 매개변수가 전부 있는 생성자
 // @Data   // 모든 Annotation을 한번에 적용
+@ToString   // 자동 오버라이딩
 public class MemberLoginReqDto {
     private String email;
     private String pwd;
