@@ -3,13 +3,14 @@ package com.autoever.sample_jpa_mysql.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "member")
-@Getter @Setter
+@Getter @Setter @ToString
 @NoArgsConstructor
 public class Member {
     @Id
