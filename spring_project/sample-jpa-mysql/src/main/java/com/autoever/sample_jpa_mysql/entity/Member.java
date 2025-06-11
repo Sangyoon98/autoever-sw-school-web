@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "member")
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = "pwd")
 @NoArgsConstructor
 public class Member {
     @Id
