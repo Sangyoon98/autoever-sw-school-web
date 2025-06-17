@@ -430,3 +430,28 @@ CREATE TABLE enroll (
 	PRIMARY KEY (student_id, course_id),
 	UNIQUE(student_id, grade)
 );
+
+
+
+-- 2025-06-17
+SHOW DATABASES;
+CREATE DATABASE spring_jdbc;
+USE spring_jdbc;
+
+CREATE TABLE mini_member (
+    email VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(100) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 샘플 데이터 삽입
+INSERT INTO mini_member VALUES
+('yujin@example.com', 'securepass123', '안유진', DEFAULT),
+('gaeul@example.com', 'securepass456', '가을', DEFAULT),
+('rei@example.com', 'securepass789', '레이', DEFAULT),
+('wonyoung@example.com', 'securepass101', '장원영', DEFAULT),
+('liz@example.com', 'securepass202', '리즈', DEFAULT),
+('leeseo@example.com', 'securepass303', '이서', DEFAULT);
+
+SELECT * FROM mini_member;
