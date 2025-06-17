@@ -1,5 +1,6 @@
 package com.autoever.sample_jpa_mysql.service;
 
+import com.autoever.sample_jpa_mysql.dao.MemberDao;
 import com.autoever.sample_jpa_mysql.dto.MemberReqDto;
 import com.autoever.sample_jpa_mysql.dto.MemberResDto;
 import com.autoever.sample_jpa_mysql.entity.Member;
@@ -18,13 +19,19 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final MemberDao memberDao;
 
-    // 회원 전체 조회
-    public List<MemberResDto> findAll() {
+    // 회원 전체 조회 JPA
+    /*public List<MemberResDto> findAll() {
         List<Member> members = memberRepository.findAll();  // DB의 정보를 Member Entity에 담음
         List<MemberResDto> memberResDtos = new ArrayList<>();   // DTO List 생성
         for (Member member : members) memberResDtos.add(convertEntityToDto(member));
         return memberResDtos;
+    }*/
+
+    // 회원 전체 조회 JDBC
+    public List<MemberResDto> findAll() {
+        return memberDao.findAll();
     }
 
     // 회원 상세 조회
