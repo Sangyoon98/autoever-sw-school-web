@@ -18,7 +18,7 @@ import java.util.List;
 public class MemberDao {
     private final JdbcTemplate jdbcTemplate;
 
-    // 전체 조회
+    /*// 전체 조회
     private static final String SELECT_ALL = "SELECT * FROM member";
 
     public List<MemberResDto> findAll() {
@@ -35,5 +35,5 @@ public class MemberDao {
                     rs.getTimestamp("reg_date").toLocalDateTime()
             );
         }
-    }
+    }*/
 }

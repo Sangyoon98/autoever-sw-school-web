@@ -26,7 +26,7 @@ public class MemberService {
         List<Member> members = memberRepository.findAll();
         List<MemberResDto> memberDtos = new ArrayList<>();
         for(Member member : members) {
-            memberDtos.add(MemberResDto.of(member));
+            memberDtos.add(convertEntityToDto(member));
         }
         return memberDtos;
     }

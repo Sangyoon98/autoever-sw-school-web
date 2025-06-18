@@ -27,7 +27,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return new BCryptPasswordEncoder(); // BCrypt 암호화 객체를 Bean으로 등록
     }
 
-    @Bean // SecurityFilterChain 객체를 Bean으로 등록
+    @Bean // SecurityFilterChain 객체를 Bean으로 등록Add commentMore actions
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and()
@@ -39,7 +39,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .accessDeniedHandler(jwtAccessDeniedHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/", "/static/**", "/auth/**", "/ws/**", "/movies/**", "/elastic/**").permitAll()
+                .antMatchers("/", "/static/**", "/auth/**", "/ws/**").permitAll()
                 .antMatchers("/v2/api-docs", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger/**", "/sign-api/exception").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers("/favicon.ico","/manifest.json").permitAll()
