@@ -22,7 +22,7 @@ public class MemberService {
     private final MemberDao memberDao;
 
     // 회원 전체 조회
-    public List<MemberResDto> getMemberList() {
+    public List<MemberResDto> findAll() {
         List<Member> members = memberRepository.findAll();
         List<MemberResDto> memberDtos = new ArrayList<>();
         for(Member member : members) {

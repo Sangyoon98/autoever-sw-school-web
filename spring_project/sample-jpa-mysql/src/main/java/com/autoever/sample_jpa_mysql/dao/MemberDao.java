@@ -30,7 +30,7 @@ public class MemberDao {
             return new MemberResDto(
                     rs.getString("email"),
                     rs.getString("name"),
-                    rs.getString("pwd"),
+                    //rs.getString("pwd"),
                     rs.getString("image"),
                     rs.getTimestamp("reg_date").toLocalDateTime()
             );
