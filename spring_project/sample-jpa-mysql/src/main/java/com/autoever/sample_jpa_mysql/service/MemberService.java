@@ -21,6 +21,16 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final MemberDao memberDao;
 
+    // 회원 전체 조회
+    public List<MemberResDto> getMemberList() {
+        List<Member> members = memberRepository.findAll();
+        List<MemberResDto> memberDtos = new ArrayList<>();
+        for(Member member : members) {
+            memberDtos.add(MemberResDto.of(member));
+        }
+        return memberDtos;
+    }
+
     // 회원 전체 조회 JPA
     /*public List<MemberResDto> findAll() {
         List<Member> members = memberRepository.findAll();  // DB의 정보를 Member Entity에 담음
@@ -29,10 +39,10 @@ public class MemberService {
         return memberResDtos;
     }*/
 
-    // 회원 전체 조회 JDBC
+    /*// 회원 전체 조회 JDBC
     public List<MemberResDto> findAll() {
         return memberDao.findAll();
-    }
+    }*/
 
     // 회원 상세 조회
     public MemberResDto findByEmail(String email) {
@@ -70,7 +80,7 @@ public class MemberService {
     private MemberResDto convertEntityToDto(Member member) {
         MemberResDto memberResDto = new MemberResDto();
         memberResDto.setEmail(member.getEmail());
-        memberResDto.setPwd(member.getPwd());
+        //memberResDto.setPwd(member.getPwd());
         memberResDto.setName(member.getName());
         memberResDto.setImage(member.getImage());
         memberResDto.setRegDate(member.getRegDate());
