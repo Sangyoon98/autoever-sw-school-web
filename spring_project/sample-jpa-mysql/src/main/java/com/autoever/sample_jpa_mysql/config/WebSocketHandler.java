@@ -1,16 +1,25 @@
 package com.autoever.sample_jpa_mysql.config;
 
+import com.autoever.sample_jpa_mysql.dto.ChatMessageDto;
+import com.autoever.sample_jpa_mysql.service.ChatService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class WetSocketHandler extends TextWebSocketHandler {
+public class WebSocketHandler extends TextWebSocketHandler {
     private final ChatService chatService;
-    private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;    // 메시지 역직렬화
 
     // 세션별 채팅방 ID 저장
     private final Map<WebSocketSession, String> sessionRoomMap = new ConcurrentHashMap<>();
