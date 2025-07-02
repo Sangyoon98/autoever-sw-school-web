@@ -21,6 +21,7 @@ import EventHandle from "./components/EventHandle.vue";
 import SelectBox from "./components/SelectBox.vue";
 import ArrayRender from "./components/ArrayRender.vue";
 import UserList from "./pages/UserList.vue";
+import BoxofficeView from "./pages/BoxofficeView.vue";
 // import { ref } from "vue";
 // const message = ref("");
 
@@ -59,7 +60,8 @@ import UserList from "./pages/UserList.vue";
   <!-- <EventHandle /> -->
   <!-- <SelectBox /> -->
   <!-- <ArrayRender /> -->
-  <UserList />
+  <!--  <UserList />-->
+  <Boxoffice-view/>
 </template>
 
 <style scoped>
