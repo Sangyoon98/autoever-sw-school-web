@@ -8,7 +8,8 @@ from routes.product import (root_path,
                             get_all_products,
                             get_product_by_name,
                             update_product,
-                            delete_product
+                            delete_product,
+                            get_total_quantity
                             )
 
 app = Flask(__name__)
@@ -22,6 +23,7 @@ app.add_url_rule("/products/<name>", view_func=get_product_by_name, methods=["GE
 app.add_url_rule("/products/<name>", view_func=update_product, methods=["PUT"])
 app.add_url_rule("/products/<name>", view_func=delete_product, methods=["DELETE"])
 app.add_url_rule("/api/boxoffice", view_func=get_box_office, methods=["GET"])
+app.add_url_rule("/products/summary", view_func=get_total_quantity, methods=["GET"])
 
 # 스케쥴러 등록
 scheduler = BackgroundScheduler()
