@@ -3,13 +3,17 @@ package com.autoever.sample_jpa_mysql.controller;
 import com.autoever.sample_jpa_mysql.dto.BoardResDto;
 import com.autoever.sample_jpa_mysql.dto.BoardWriteDto;
 import com.autoever.sample_jpa_mysql.dto.PageResDto;
+import com.autoever.sample_jpa_mysql.entity.Board;
 import com.autoever.sample_jpa_mysql.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
@@ -21,6 +25,23 @@ import java.util.List;
 @RequestMapping("/board")
 public class BoardController {
     private final BoardService boardService;    // 의존성 주입
+
+    @PostMapping("/new")
+    public ResponseEntity<Boolean> newBoard(@RequestBody BoardWriteDto boardWriteDto) {
+        Board board = boardService.saveAndReturn(boardWriteDto);
+        // Flask 분석 요청 보내기
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            Map<String, Object> request = new HashMap<>();
+            request.put("postId",  board.getId());
+            request.put("title", board.getTitle());
+            request.put("content", board.getContent());
+            restTemplate.postForEntity("http://127.0.0.1:5000/predict", request, Boolean.class);
+        } catch (Exception e) {
+            log.error("Flask 분석 요청 실패: {}", e.getMessage());
+        }
+        return ResponseEntity.ok(true);
+    }
 
     // 게시글 등록 : 입력(BoardWriteDto), 반환(boolean)
     @PostMapping("/write")

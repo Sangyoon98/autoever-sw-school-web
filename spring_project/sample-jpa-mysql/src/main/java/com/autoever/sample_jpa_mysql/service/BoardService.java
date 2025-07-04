@@ -25,6 +25,12 @@ public class BoardService {
     private final BoardRepository boardRepository;
     private final MemberRepository memberRepository;
 
+    public Board saveAndReturn(BoardWriteDto boardWriteDto) {
+        Board board = convertDtoToEntity(boardWriteDto);
+        board = boardRepository.save(board);
+        return board;
+    }
+
     // 게시글 등록 : 반환값 Boolean
     public boolean addBoard(BoardWriteDto boardWriteDto) {
         try {
