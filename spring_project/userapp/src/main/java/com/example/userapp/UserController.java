@@ -1,5 +1,6 @@
 package com.example.userapp;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +45,15 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @GetMapping("/{userId}/products")
+    public ResponseEntity<List<Product>> getUserProducts(@PathVariable Long userId) {
+        List<Product> dummyProducts = List.of(
+                new Product(1L, "싱품A"),
+                new Product(2L, "싱품B"),
+                new Product(3L, "싱품C")
+        );
+        return ResponseEntity.ok(dummyProducts);
     }
 }
